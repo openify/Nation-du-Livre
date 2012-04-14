@@ -1,6 +1,6 @@
 <?php
 
-require_once( dirname( dirname( __FILE__ ) ) . '/utils/Request.php' );
+require_once( dirname( dirname( __FILE__ ) ) . '/classes/Request.php' );
 
 $request = new Request( );
 

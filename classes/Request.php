@@ -1,6 +1,6 @@
 <?php
 
-require_once( dirname( __FILE__ ) . '/String_Utils.php' );
+require_once( dirname( __FILE__ ) . '/String.php' );
 
 class Request {
 
