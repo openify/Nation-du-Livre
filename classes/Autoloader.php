@@ -29,9 +29,9 @@ class Autoloader {
 	  PRIVATE METHODS                   
 	 *************************************************************************/
         private function loader( $class_name ) {
-		if ( String::ends_with( $class_name, '_Controller' ) ) {
+		if ( String::ends_with( $class_name, 'Controller' ) ) {
 			$file_path = $this->controllers_folder_path;
-		} else if ( String::ends_with( $class_name, '_Model' ) ) {
+		} else if ( String::ends_with( $class_name, 'Model' ) ) {
 			$file_path = $this->models_folder_path;
 		} else {
 			$file_path = $this->classes_folder_path;

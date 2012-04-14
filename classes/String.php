@@ -7,7 +7,7 @@ abstract class String {
 	  STATIC METHODS                   
 	 *************************************************************************/
 	static function starts_with( $hay, $needle ) {
-		return String::substr( $hay, 0, strlen( $needle ) ) == $needle;
+		return substr( $hay, 0, strlen( $needle ) ) == $needle;
 	}
 	static function ends_with( $hay, $needle ) {
 		return substr( $hay, -strlen( $needle ) ) == $needle;

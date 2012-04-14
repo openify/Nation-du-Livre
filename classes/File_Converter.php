@@ -60,6 +60,7 @@ class File_Converter {
 	protected function execute($source, $destination){
 		$ext = pathinfo($destination, PATHINFO_EXTENSION);
 		$dirname = pathinfo($destination, PATHINFO_DIRNAME);
+		echo $dirname;
 		//$dirFrom = getcwd();
 		//chdir($this->dir);
 		mkdir($dirname);
