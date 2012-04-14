@@ -40,10 +40,10 @@ class Request {
 	 *************************************************************************/
 	private function init_path( ) {
 		$path = urldecode( $_SERVER[ 'REQUEST_URI' ] );
-		if ( String_Utils::contains( $path, '?' ) ) {
+		if ( String::contains( $path, '?' ) ) {
 			$path = String_Utils::substr_before( $path, '?' );
 		}
-		if ( ! String_Utils::contains( $path, '/' ) ) {
+		if ( ! String::contains( $path, '/' ) ) {
 			$path .= '/';
 		}
 		$this->path = $path;

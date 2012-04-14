@@ -1,6 +1,6 @@
 <?php
 
-abstract class String_Utils {
+abstract class String {
 
 
 	/*************************************************************************
