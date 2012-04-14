@@ -28,7 +28,7 @@ class Router {
 	  PUBLIC METHODS                   
 	 *************************************************************************/
 	public function call( ) {
-		call_user_func( array( $this->controller, $this->action ), $this->parameters );
+		call_user_func_array( array( $this->controller, $this->action ), $this->parameters );
 	}
 
 

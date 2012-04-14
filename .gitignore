@@ -1,2 +1,8 @@
 ignore temporary files,
+caches
 *~
+
+.buildpath
+.project
+.settings
+
