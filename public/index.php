@@ -2,6 +2,6 @@
 
 require_once( dirname( dirname( __FILE__ ) ) . '/include.php' );
 
-$request = new Request( );
+$request = new Router( );
 
 print_r( $request );
