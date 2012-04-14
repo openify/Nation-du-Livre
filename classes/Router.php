@@ -25,6 +25,14 @@ class Router {
 
 
 	/*************************************************************************
+	  PUBLIC METHODS                   
+	 *************************************************************************/
+	public function call( ) {
+		call_user_func( array( $this->controller, $this->action ), $this->parameters );
+	}
+
+
+	/*************************************************************************
 	  PRIVATE METHODS                   
 	 *************************************************************************/
 	private function init_path( ) {
@@ -38,18 +46,29 @@ class Router {
 	private function init_route( ) {
 		$url_parts = explode( '/', substr( $this->path, 1 ) );
 
+		// Controller
 		if ( strlen( $this->path ) == 1 ) {
-			$this->controller = self::DEFAULT_CONTROLLER;
+			$controller_name = self::DEFAULT_CONTROLLER;
 		} else {
-			$this->controller = $url_parts[ 0 ];
+			$controller_name = $url_parts[ 0 ];
+		}
+		$controller_name = ucfirst( $controller_name ) . '_Controller';
+		try {		
+			$this->controller = new $controller_name( );
+		} catch ( Exception $e ) {
+			throw new Exception( 'Unknown controller "' . $controller_name . '"' );
 		}
 
+		// Action
 		if ( count( $url_parts ) < 2 ) {
 			$this->action = self::DEFAULT_ACTION;
 		} else {
 			$this->action = $url_parts[ 1 ];
 		}
+		/*if ( method_exists( $this->controller, $this->action ) ) {
+			throw new Exception( 'Unknown controller\'s action "' . $controller_name . '::' . $this->action .'"' );
+		}*/
 
-		$this->parameters = array_slice( $url_parts, 3 );
+		$this->parameters = array_slice( $url_parts, 2 );
 	}
 }
