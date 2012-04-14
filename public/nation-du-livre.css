@@ -1,0 +1,62 @@
+html, body{
+	height: 100%;
+}
+body {
+	color: #434343;
+	background: #F0F0F0;
+}
+.container {
+	margin: 0 auto;
+	width: 960px;
+	border: 1px solid #DBDBDB;
+	border-width: 0 1px 1px;
+	background: #F4F4F4;
+}
+.header {
+	padding: 10px 50px;
+}
+.logo {
+	background: url('./livre.png') no-repeat left top;
+	height: 150px;
+	width: 300px;
+	margin-bottom:	-80px;
+	position: relative;
+	z-index: 20;
+}
+.user {
+	padding: 20px 0;
+	float: right;
+}
+.user a {
+	color: #434343;
+}
+.user a:hover,
+.user a:active,
+.user a:focus {
+	color: #06BFEA;
+}
+.nav {
+	padding: 10px 50px;
+	text-align: right;
+	color: white;
+	font-weight: bold;
+	background: #06BFEA;
+	position: relative;
+	z-index: 10;
+}
+.nav a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.nav a:hover,
+.nav a:active,
+.nav a:focus {
+	text-decoration: underline;
+}
+.main {
+	padding: 10px 10px 50px;
+	background: #FFFFFF;
+}
+.footer {
+	padding: 10px;
+}

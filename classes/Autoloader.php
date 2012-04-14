@@ -10,6 +10,7 @@ class Autoloader {
 	 *************************************************************************/
 	public $controllers_folder_path;
 	public $models_folder_path;
+	public $views_folder_path;
 	public $classes_folder_path;
 
 
@@ -21,6 +22,7 @@ class Autoloader {
 		$root_path = dirname( dirname( __FILE__ ) );
 		$this->controllers_folder_path = $root_path . '/controllers/';
 		$this->models_folder_path = $root_path . '/models/';
+		$this->views_folder_path = $root_path . '/views/';
 		$this->classes_folder_path = $root_path . '/classes/';
         }
 
@@ -33,6 +35,8 @@ class Autoloader {
 			$file_path = $this->controllers_folder_path;
 		} else if ( String::ends_with( $class_name, 'Model' ) ) {
 			$file_path = $this->models_folder_path;
+		} else if ( String::ends_with( $class_name, 'View' ) ) {
+			$file_path = $this->views_folder_path;
 		} else {
 			$file_path = $this->classes_folder_path;
 		}

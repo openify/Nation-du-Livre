@@ -34,7 +34,7 @@ class Router {
 		$this->init_route_action( );
 	}
 	public function call( ) {
-		call_user_func_array( $this->callable_action( ), $this->parameters );
+		return call_user_func_array( $this->callable_action( ), $this->parameters );
 	}
 
 

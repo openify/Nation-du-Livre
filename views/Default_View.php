@@ -1,13 +1,16 @@
 <?php
 
-class Welcome_Controller {
+class Default_View {
 
 
 	/*************************************************************************
 	  ACTION METHODS                   
 	 *************************************************************************/
-	public function view( ) {
-		$view = new Default_View( );
-		return $view->render( 'Bienvenue', 'The nation to be' ); 
+	public function render( $title, $content ) {
+		ob_start();		
+		require( dirname( __FILE__ ) . '/default.html' );
+		$html = ob_get_contents();
+		ob_end_clean();
+		return $html;
 	}
 }

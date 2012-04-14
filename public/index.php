@@ -17,10 +17,11 @@ try {
 }
 
 try {
-	$router->call( );
+	echo $router->call( );
 } catch( Exception $e ) {
 	$router->route( '/error/view' );
 	$router->parameters = array( '500', $e->getMessage( ) );
+	echo $router->call( );
 }
 
 
