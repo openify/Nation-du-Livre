@@ -7,5 +7,5 @@ try {
 	$router->call( );
 } catch( Exception $e ) {
 	echo '<h1>Error 500</h1>';
-	echo 'Essaye l\'url http://local.nation/book/read/1';
+	echo 'Essaye <a href="http://local.nation/book/read/1" >cette url</a>';
 }
