@@ -5,7 +5,7 @@ class Welcome_Controller {
 	/*************************************************************************
 	  ACTION METHODS                   
 	 *************************************************************************/
-	public function view( $arguments ) {
+	public function view( ) {
 		echo 'Welcome!';
 	}
 }
