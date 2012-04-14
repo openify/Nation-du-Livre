@@ -20,13 +20,13 @@ class Book_Controller {
 	  ACTION METHODS                   
 	 *************************************************************************/
         public function read( $id ) {
-			$source = $this->rootDir.'/..'.File_Converter::SOURCE_DIR.'/'.$id.'/'.$id.'.doc';
-			$destination = $this->rootDir.'/..'.File_Converter::CACHE_DIR.'/'.$id.'/'.$id;
-			
-			
-			if (!is_readable($source)){
-				throw new Exception('File is not readable');
-			}
+		$source = $this->rootDir.'/..'.File_Converter::SOURCE_DIR.'/'.$id.'/'.$id.'.doc';
+		$destination = $this->rootDir.'/..'.File_Converter::CACHE_DIR.'/'.$id.'/'.$id;
+		
+		
+		if (!is_readable($source)){
+			throw new Exception('File is not readable');
+		}
 			
         	$converter = new File_Converter();
         	$converter->setSource($source);
