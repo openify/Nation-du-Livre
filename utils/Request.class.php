@@ -1,5 +1,7 @@
 <?php
 
+require_once( dirname( __FILE__ ) . '/String_Utils.class.php' );
+
 class Request {
 
 
