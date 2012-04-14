@@ -2,11 +2,17 @@
 
 require_once( dirname( dirname( __FILE__ ) ) . '/include.php' );
 
+$router = new Router( );
 try {
-	$router = new Router( );
+	$router->auto_route( );
+} catch( Exception $e ) {
+	$router->route( '/error/view' );
+	$router->parameters = array( '404', $e->getMessage( ) );
+}
+
+try {
 	$router->call( );
 } catch( Exception $e ) {
-	echo '<h1>Error 500</h1>';
-	echo 'Essaye l\'url http://local.nation/book/read/1';
-	echo $e->getMessage();
+	$router->route( '/error/view' );
+	$router->parameters = array( '500', $e->getMessage( ) );
 }
