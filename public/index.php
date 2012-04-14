@@ -2,10 +2,10 @@
 
 require_once( dirname( dirname( __FILE__ ) ) . '/include.php' );
 
+$router = new Router( );
 try {
-	$router = new Router( );
-	$router->call( );
+	$router->auto_route( );
 } catch( Exception $e ) {
-	echo '<h1>Error 500</h1>';
-	echo 'Essaye <a href="http://local.nation/book/read/1" >cette url</a>';
+	$router->route( '/error/view/404' );
 }
+$router->call( );

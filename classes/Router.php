@@ -6,7 +6,7 @@ class Router {
 	/*************************************************************************
 	  ATTRIBUTES                 
 	 *************************************************************************/
-	public $path;
+	public $route;
 	public $controller;
 	public $action;
 	public $parameters;
@@ -19,35 +19,41 @@ class Router {
 	  CONSTRUCTOR                   
 	 *************************************************************************/
 	public function __construct( ) {
-		$this->init_path( );
-		$this->init_route( );
 	}
 
 
 	/*************************************************************************
 	  PUBLIC METHODS                   
 	 *************************************************************************/
+	public function auto_route( ) {
+		$this->init_route( );
+		$this->init_route_action( );
+	}
+	public function route( $route ) {
+		$this->route = $route;
+		$this->init_route_action( );
+	}
 	public function call( ) {
-		call_user_func( $this->callable_action( ), $this->parameters );
+		call_user_func_array( $this->callable_action( ), $this->parameters );
 	}
 
 
 	/*************************************************************************
 	  PRIVATE METHODS                   
 	 *************************************************************************/
-	private function init_path( ) {
-		$path = urldecode( $_SERVER[ 'REQUEST_URI' ] );
-		$path = String::substr_before( $path, '?' );
-		if ( $path === '' ) {
-			$path = '/';
-		}
-		$this->path = $path;
-	}
 	private function init_route( ) {
-		$url_parts = explode( '/', substr( $this->path, 1 ) );
+		$route = urldecode( $_SERVER[ 'REQUEST_URI' ] );
+		$route = String::substr_before( $route, '?' );
+		if ( $route === '' ) {
+			$route = '/';
+		}
+		$this->route = $route;
+	}
+	private function init_route_action( ) {
+		$url_parts = explode( '/', substr( $this->route, 1 ) );
 
 		// Controller
-		if ( strlen( $this->path ) == 1 ) {
+		if ( strlen( $this->route ) == 1 ) {
 			$controller_name = self::DEFAULT_CONTROLLER;
 		} else {
 			$controller_name = $url_parts[ 0 ];
