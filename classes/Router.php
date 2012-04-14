@@ -28,7 +28,7 @@ class Router {
 	  PUBLIC METHODS                   
 	 *************************************************************************/
 	public function call( ) {
-		call_user_func( array( $this->controller, $this->action ), $this->parameters );
+		call_user_func( $this->callable_action( ), $this->parameters );
 	}
 
 
@@ -65,10 +65,13 @@ class Router {
 		} else {
 			$this->action = $url_parts[ 1 ];
 		}
-		/*if ( method_exists( $this->controller, $this->action ) ) {
+		if ( ! is_callable( $this->callable_action( ) ) ) {
 			throw new Exception( 'Unknown controller\'s action "' . $controller_name . '::' . $this->action .'"' );
-		}*/
+		}
 
 		$this->parameters = array_slice( $url_parts, 2 );
+	}
+	private function callable_action( ) {
+		return array( $this->controller, $this->action );
 	}
 }
