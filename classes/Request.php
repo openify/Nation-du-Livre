@@ -1,7 +1,5 @@
 <?php
 
-require_once( dirname( __FILE__ ) . '/String.php' );
-
 class Request {
 
 
@@ -40,11 +38,9 @@ class Request {
 	 *************************************************************************/
 	private function init_path( ) {
 		$path = urldecode( $_SERVER[ 'REQUEST_URI' ] );
-		if ( String::contains( $path, '?' ) ) {
-			$path = String_Utils::substr_before( $path, '?' );
-		}
-		if ( ! String::contains( $path, '/' ) ) {
-			$path .= '/';
+		$path = String::substr_before( $path, '?' );
+		if ( $path === '' ) {
+			$path = '/';
 		}
 		$this->path = $path;
 	}
