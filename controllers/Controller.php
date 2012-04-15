@@ -20,7 +20,7 @@ class Controller {
 	/*************************************************************************
 	  PRIVATE METHODS                   
 	 *************************************************************************/
-	protected function render( $template, $var ) {
+	protected function render( $template, $var = array( ) ) {
 		return $this->view->render( $template, $var );
 	}
 }

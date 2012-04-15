@@ -48,12 +48,7 @@ class Book_Controller extends Controller {
 		// Formulaire
 		} else {
 			$var[ 'title' ] = 'Prepublication';
-			$var[ 'content' ] = '<form method="post" action="">' .
-					   '<div><label for="title">Titre:</label><input type="text" id="title" name="title" /></div>' .
-					   '<div><label for="summary">Résumé:</label><input type="text" id="summary" name="summary" /></div>' .
-					   '<div><label for="table_of_contents">Table des matières :</label><input type="text" id="table_of_contents" name="table_of_contents" /></div>' .
-					   '<input type="submit" value="Submit" />' .
-					   '</form>';
+			$var[ 'content' ] = $this->render( '../views/book_prepublication_form.html' ); 
 		}		
 		return $this->render( View::LAYOUT_TEMPLATE, $var ); 
 	}
