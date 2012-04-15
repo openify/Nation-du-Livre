@@ -1,17 +1,36 @@
 <?php
 
 class User_Model extends Model {
-	const CRYPT_SEED = 'dacz:;,aafapojn';
+
+
+	/*************************************************************************
+	 ATTRIBUTES
+	 *************************************************************************/
+	const CRYPT_SEED = 'dacz:;,aafapojn'; 
+
+
+	/*************************************************************************
+	  GETTER & SETTER                 
+	 *************************************************************************/
+	public function set( $name, $value ) {
+		if ( $name == 'password' ) {
+			$this->_attribute_values[ $name ] = $this->crypt( $value );
+			return $this;
+		}
+		return parent::set( $name, $value );
+	}
+
 
 	/*************************************************************************
 	  CONSTRUCTOR                   
 	 *************************************************************************/
 	public function __construct( ) {
-		$this->add_attribute_name('id');
-		$this->add_attribute_name('login');
-		$this->add_attribute_name('password');
-		$this->add_attribute_name('name');
-		$this->add_attribute_name('lastname');
+		$this->add_attribute_field('id');
+		$this->add_attribute_field('login');
+		$this->add_attribute_field('password');
+		$this->add_attribute_field('name');
+		$this->add_attribute_field('lastname');
+		$this->add_attribute_relation( 'books', 'user', 'book', 'UsersBooks_Model' );
 		$this->id_field = 'id';
 		$this->database_table_name = 'users';
 	}
@@ -54,6 +73,22 @@ class User_Model extends Model {
 
 	function crypt( $pwd ) {
 		return sha1( self::CRYPT_SEED . $pwd );
+	}
+}
+
+
+class UsersBooks_Model extends Model {
+
+
+	/*************************************************************************
+	  CONSTRUCTOR                   
+	 *************************************************************************/
+	public function __construct( ) {
+		$this->add_attribute_field('id');
+		$this->add_attribute_field('user');
+		$this->add_attribute_field('book');
+		$this->id_field = 'id';
+		$this->database_table_name = 'users_books';
 	}
 }
 
