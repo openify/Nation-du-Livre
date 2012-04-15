@@ -30,7 +30,7 @@ class User_Model extends Model {
 		$this->add_attribute_field('password');
 		$this->add_attribute_field('name');
 		$this->add_attribute_field('lastname');
-		$this->add_attribute_relation( 'books', 'user', 'book', new Users_Books_Model( ) );
+		$this->add_attribute_relation( 'books', 'user', 'book', new Users_Books_Relation( ) );
 		$this->id_field = 'id';
 		$this->database_table_name = 'users';
 	}
