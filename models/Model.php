@@ -44,7 +44,7 @@ class Model implements ArrayAccess  {
 	}
 	public function add_relation( $name, $value ) {
 		$infos = $this->_attribute_relation_names[ $name ];
-		$relation = new $infos[ 'class' ];
+		$relation = $infos[ 'object' ];
 		$relation[ $infos[ 'index' ] ] = $this->id( );
 		$relation[ $infos[ 'related' ] ] = $this->format_related_value( $value );
 		$relation->save( );
@@ -77,8 +77,8 @@ echo $relation[ $infos[ 'related' ] ] . ' ? ' . $value . '<br>';
 	protected function add_attribute_field( $name ) {
 		$this->_attribute_field_names[ $name ] = true;
 	}
-	protected function add_attribute_relation( $name, $index, $related, $class ) {
-		$this->_attribute_relation_names[ $name ] = array( 'index' => $index, 'related' => $related, 'class' => $class );
+	protected function add_attribute_relation( $name, $index, $related, $object ) {
+		$this->_attribute_relation_names[ $name ] = array( 'index' => $index, 'related' => $related, 'object' => $object );
 	}
 
 
@@ -95,7 +95,7 @@ echo $relation[ $infos[ 'related' ] ] . ' ? ' . $value . '<br>';
 			}
 		}
 		foreach ( $this->_attribute_relation_names as $name => $infos ) {
-			$relation = new $infos[ 'class' ];
+			$relation = $infos[ 'object' ];
 			$this->_attribute_values[ $name ] = $relation->get_by_index( $infos[ 'index' ], $this->id( ) );
 		}
 	}

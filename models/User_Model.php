@@ -30,7 +30,7 @@ class User_Model extends Model {
 		$this->add_attribute_field('password');
 		$this->add_attribute_field('name');
 		$this->add_attribute_field('lastname');
-		$this->add_attribute_relation( 'books', 'user', 'book', 'UsersBooks_Model' );
+		$this->add_attribute_relation( 'books', 'user', 'book', new Users_Books_Model( ) );
 		$this->id_field = 'id';
 		$this->database_table_name = 'users';
 	}
@@ -79,19 +79,3 @@ class User_Model extends Model {
 }
 
 
-class UsersBooks_Model extends Model {
-
-
-	/*************************************************************************
-	  CONSTRUCTOR                   
-	 *************************************************************************/
-	public function __construct( ) {
-		$this->add_attribute_field('id');
-		$this->add_attribute_field('user');
-		$this->add_attribute_field('book');
-		$this->id_field = 'id';
-		$this->database_table_name = 'users_books';
-	}
-}
-
-?>
