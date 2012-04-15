@@ -61,3 +61,14 @@ body {
 .footer {
 	padding: 10px;
 }
+.form div {
+	position: relative;
+    width: 700px;
+}
+.form div label {
+    float: left;
+	margin-right: 10px;
+    position: relative;
+    text-align: right;
+    width: 100px;
+}
