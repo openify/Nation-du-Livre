@@ -1,5 +1,7 @@
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `login` varchar(255),
+  `password` varchar(255),
   `name` varchar(255),
   `lastname` varchar(255),
   KEY `id` (`id`)

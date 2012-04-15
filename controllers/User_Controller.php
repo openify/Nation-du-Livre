@@ -4,11 +4,13 @@ class User_Controller {
 
 
 	/*************************************************************************
-	  ACTION METHODS                   
+	  ACTION METHODS                   init_by_login
 	 *************************************************************************/
 	public function login( ) {
-		if ( $_POST ) {
-			echo 'Login/pass validation';
+		if ( isset( $_POST['login'] ) ) {
+			$user = new User_Model();
+			$user->init_by_login( $_POST['login'] );
+			$user->checkpass( $user, $_POST['password'] );
 		} else {
 			echo '<h1>Login page</h1>';
 			echo '<form method="post" action="">';
