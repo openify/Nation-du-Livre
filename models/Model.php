@@ -7,7 +7,8 @@ class Model implements ArrayAccess  {
 	  ATTRIBUTES                 
 	 *************************************************************************/
 	public $_attribute_values = array( );
-	public $_attribute_names  = array( );
+	public $_attribute_field_names  = array( );
+	public $_attribute_relation_names  = array( );
 	public $id_field;
 	public $database_table_name;
 
@@ -19,11 +20,13 @@ class Model implements ArrayAccess  {
 		return $this->get( $name );
 	}
 	public function get( $name ) {
-		if ( ! isset( $this->_attribute_names[ $name ] ) ) {
+		if ( ! isset( $this->_attribute_field_names[ $name ] ) && ! isset( $this->_attribute_relation_names[ $name ] ) ) {
 			return null;
 		}
-		if ( ! isset( $this->_attribute_values[ $name ] ) ) {
+		if ( isset( $this->_attribute_field_names[ $name ] ) && ! isset( $this->_attribute_values[ $name ] ) ) {
 			return null;
+		}
+		if ( isset( $this->_attribute_relation_names[ $name ] ) && ! isset( $this->_attribute_values[ $name ] ) ) {
 		}
 		return $this->_attribute_values[ $name ];
 	}
@@ -34,36 +37,75 @@ class Model implements ArrayAccess  {
 		return $this->set( $name, $value );
 	}
 	public function set( $name, $value ) {
-		if ( ! isset( $this->_attribute_names[ $name ] ) ) {
+		if ( ! isset( $this->_attribute_field_names[ $name ] ) ) {
 			return $this;
 		}
 		$this->_attribute_values[ $name ] = $value;
+	}
+	public function add_relation( $name, $value ) {
+		$infos = $this->_attribute_relation_names[ $name ];
+		$relation = new $infos[ 'class' ];
+		$relation[ $infos[ 'index' ] ] = $this->id( );
+		$relation[ $infos[ 'related' ] ] = $this->format_related_value( $value );
+		$relation->save( );
+		$this->_attribute_values[ $name ][ ] = $relation;
+	}
+	public function remove_relation( $name, $value ) {
+		$value = $this->format_related_value( $value );
+		$infos = $this->_attribute_relation_names[ $name ];
+		foreach ( $this->_attribute_values[ $name ] as $key => $relation ) {
+echo $relation[ $infos[ 'related' ] ] . ' ? ' . $value . '<br>';
+			if ( $relation[ $infos[ 'related' ] ] == $value ) {
+				$relation->delete( );
+				unset( $this->_attribute_values[ $name ][ $key ] );
+				return true;
+			}
+		}
+		return false;
+	}
+	private function format_related_value( $value ) {
+		if ( is_object( $value ) ) {
+			return $value->id( );
+		}
+		return $value;
+	}
+
+
+	/*************************************************************************
+	  DEFINITION          
+	 *************************************************************************/
+	protected function add_attribute_field( $name ) {
+		$this->_attribute_field_names[ $name ] = true;
+	}
+	protected function add_attribute_relation( $name, $index, $related, $class ) {
+		$this->_attribute_relation_names[ $name ] = array( 'index' => $index, 'related' => $related, 'class' => $class );
 	}
 
 
 	/*************************************************************************
 	  INITIALIZATION          
 	 *************************************************************************/
-	function add_attribute_name( $name ) {
-		$this->_attribute_names[ $name ] = true;
+	protected function get_attribute_field_names( ) {
+		return array_keys( $this->_attribute_field_names );
 	}
-	function get_attribute_names( ) {
-		return array_keys( $this->_attribute_names );
-	}
-	function init_by_data( $data ) {
-		foreach ( $this->get_attribute_names( ) as $name ) {
+	public function init_by_data( $data ) {
+		foreach ( $this->get_attribute_field_names( ) as $name ) {
 			if ( isset( $data[ $name ] ) ) {
 				$this[ $name ] = $data[ $name ];
 			}
 		}
+		foreach ( $this->_attribute_relation_names as $name => $infos ) {
+			$relation = new $infos[ 'class' ];
+			$this->_attribute_values[ $name ] = $relation->get_by_index( $infos[ 'index' ], $this->id( ) );
+		}
 	}
-	function init_by_id( $id ) {
+	public function init_by_id( $id ) {
 		$sql = 'SELECT * FROM ' . $this->database_table_name( ) . ' WHERE ' . $this->id_field . '=:id;';
 		$request = new Database_Request( $sql );
 		$data = $request->execute_one( array( ':id' => $id ) );
 		$this->init_by_data( $data );
 	}
-	function get_list_by_data( $datas ) {
+	public function get_list_by_data( $datas ) {
 		$class = get_class( $this );
 		$models = array( );
 		foreach ( $datas as $data ) {
@@ -73,11 +115,14 @@ class Model implements ArrayAccess  {
 		}
 		return $models;
 	}
-	function get_all( $specific_where = null, $order_by = null ) {
+	public function get_by_index( $index_name, $index_value ) {
+		return $this->get_all( 'WHERE ' . $index_name . '=:' . $index_name, '', array( ':' . $index_name => $index_value ) );
+	}
+	public function get_all( $specific_where = null, $order_by = null, $parameters = array( ) ) {
 		$models = array( );
 		$sql = 'SELECT * FROM ' . $this->database_table_name( ) . ' ' . $specific_where . ' ' . $order_by;
 		$request = new Database_Request( $sql );
-		$datas = $request->execute( );
+		$datas = $request->execute( $parameters );
 		$models = $this->get_list_by_data( $datas );
 		return $models;
 	}
@@ -90,7 +135,7 @@ class Model implements ArrayAccess  {
 		$this->set( $offset, $value );
 	}
 	public function offsetExists( $offset ) {
-		return isset( $this->_attribute_names[ $offset ] );
+		return isset( $this->_attribute_field_names[ $offset ] );
 	}
 	public function offsetUnset( $offset ) {
 		unset( $this->_attribute_values[ $offset ] );
@@ -103,7 +148,7 @@ class Model implements ArrayAccess  {
 	/*************************************************************************
 	  DATABASE 
 	 *************************************************************************/
-	function delete( ) {
+	public function delete( ) {
 		if ( $this->exists( ) ) {
 			$sql = 'DELETE FROM ' . $this->database_table_name( ) . ' WHERE ' . $this->id_field . '=:id;';
 			$request = new Database_Request( $sql );
@@ -111,7 +156,7 @@ class Model implements ArrayAccess  {
 			$this->init_by_data( null );
 		}
 	}
-	function save( ) {
+	public function save( ) {
 		if ( $this->exists( ) ) {
 			$sql = 'UPDATE '.$this->database_table_name( )
 				.' SET '.$this->get_set_request( )
@@ -120,8 +165,8 @@ class Model implements ArrayAccess  {
 			$request->execute_one( $this->bind_params( ) );
 		} else {
 			$sql = 'INSERT INTO ' . $this->database_table_name( )
-				. ' (`' . implode( '`, `', $this->get_attribute_names( ) ) . '`) VALUES'
-				. ' (:' . implode( ', :', $this->get_attribute_names( ) ) . ');';
+				. ' (`' . implode( '`, `', $this->get_attribute_field_names( ) ) . '`) VALUES'
+				. ' (:' . implode( ', :', $this->get_attribute_field_names( ) ) . ');';
 			$request = new Database_Request( $sql );
 			$request->execute_one( $this->bind_params( ) );
 			$id = $request->last_insert_id( );
@@ -131,24 +176,24 @@ class Model implements ArrayAccess  {
 		}
 		return true;
 	}
-	function database_table_name( ) {
+	protected function database_table_name( ) {
 		return $this->database_table_name;
 	}
-	function get_set_request( ) {
+	protected function get_set_request( ) {
 		$request = '';
-		foreach ( $this->get_attribute_names( ) as $attribute_name ) {
+		foreach ( $this->get_attribute_field_names( ) as $attribute_name ) {
 			$request .= '`' . $attribute_name . '` = :' . $attribute_name . ', ';
 		}
 		return substr( $request, 0, -2 );
 	}
-	function bind_params( ) {
+	protected function bind_params( ) {
 		$bind_params = array( );
-		foreach ( $this->get_attribute_names( ) as $attribute_name ) {
+		foreach ( $this->get_attribute_field_names( ) as $attribute_name ) {
 			$bind_params[ ':' . $attribute_name ] = $this->get( $attribute_name );
 		}
 		return $bind_params;
 	}
-	function exists( ) {
+	public function exists( ) {
 		return ( $this->id( ) !== null );
 	}
 }
