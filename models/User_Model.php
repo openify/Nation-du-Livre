@@ -1,7 +1,7 @@
 <?php
 
 class User_Model extends Model {
-
+	const CRYPT_SEED = 'dacz:;,aafapojn';
 
 	/*************************************************************************
 	  CONSTRUCTOR                   
@@ -31,13 +31,29 @@ class User_Model extends Model {
 		}
 	}
 
-	function checkpass( $user, $pass ) {
-		if ( $user->password == $pass ) {
-			session_start();
+	function checkpass( $userpwd, $pass ) {
+		if ( $userpwd === $this->crypt( $pass ) ) {
 			echo 'Logged in.';
 		} else {
 			throw new Exception( 'Bad password' );
 		}
+	}
+
+	function register( ) {
+		$login = $_POST['login'];
+		$pwd = $_POST['password'];
+		$sql = 'INSERT INTO ' . $this->database_table_name( ) . ' SET login=:login, password=:pwd;';
+		$request = new Database_Request( $sql );
+		$data = $request->execute( array( ':login' => $login, ':pwd' => $this->crypt( $pwd ) ) );
+		if ( ! empty( $data ) ) {
+			$this->init_by_data( $data );
+		} else {
+			throw new Exception( 'Registration failed' );
+		}
+	}
+
+	function crypt( $pwd ) {
+		return sha1( self::CRYPT_SEED . $pwd );
 	}
 }
 

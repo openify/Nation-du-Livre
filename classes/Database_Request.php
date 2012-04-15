@@ -68,6 +68,9 @@ class Database_Request {
 				if ( $id == '0' ) {
 					// Error Case or a table without autoincrementation
 					$id = false;
+					$result = false;
+				} else {
+					$result = true;
 				}
 				$this->last_insert_id = $id;
 			}
