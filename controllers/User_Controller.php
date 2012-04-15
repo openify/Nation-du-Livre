@@ -4,16 +4,24 @@ class User_Controller {
 
 
 	/*************************************************************************
-	  ACTION METHODS                   
+	  LOGIN ACTION                   
 	 *************************************************************************/
 	public function login( ) {
 		$error = '';
-		if ( isset( $_POST['login'] ) ) {
+		
+		// User already connected
+		if ( isset( $_SESSION[ 'user' ] ) ) {
+			header( 'Location: /' );
+			die;
+		}
+		
+		// Connection validation
+		if ( isset( $_POST[ 'login' ] ) ) {
 			$user = new User_Model();
 			try {
 				$user->init_by_login( $_POST['login'] );
 				try {
-					$user->checkpass( $user->password, $_POST['password'] );
+					$user->check_password( $user->password, $_POST['password'] );
 					$title = '';
 					$content = 'Logged in.';
 					$_SESSION[ 'user' ] = $user;
@@ -25,6 +33,8 @@ class User_Controller {
 				$error = 'Login inconnu';
 			}
 		}
+		
+		// Connection Form 
 		if ( ! isset( $_SESSION[ 'user' ] ) ) {
 			$title = 'Login page';
 			$content = '';
@@ -37,14 +47,24 @@ class User_Controller {
 					   '<input type="submit" value="Submit" />' .
 					   '</form>';
 		}
+
+		// Render
 		$view = new Default_View( );
 		return $view->render( $title, $content );
 	}
 
+
+	/*************************************************************************
+	  REGISTER ACTION                   
+	 *************************************************************************/
 	public function register( ) {
 		if ( $_POST ) {
-			$user = new User_Model();
-			$user->register( );
+			$user = new User_Model( );
+			$user->login = $_POST['login'];
+			$user->password = $user->encrypt_password( $_POST['password'] );
+			$user->name = $_POST['name'];
+			$user->lastname = $_POST['lastname'];
+			$user->save( );
 			$title = 'Register validation';
 			$content = '';
 		} else {
@@ -61,10 +81,12 @@ class User_Controller {
 		return $view->render( $title, $content );
 	}
 
+
+	/*************************************************************************
+	  EDITION ACTION                   
+	 *************************************************************************/
 	public function edit( ) {
-		echo 'edit';
+		$view = new Default_View( );
+		return $view->render( 'Editer votre profil', 'lorem ipsum' );
 	}
-
-	
-
 }

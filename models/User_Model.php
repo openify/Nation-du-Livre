@@ -6,19 +6,7 @@ class User_Model extends Model {
 	/*************************************************************************
 	 ATTRIBUTES
 	 *************************************************************************/
-	const CRYPT_SEED = 'dacz:;,aafapojn'; 
-
-
-	/*************************************************************************
-	  GETTER & SETTER                 
-	 *************************************************************************/
-	public function set( $name, $value ) {
-		if ( $name == 'password' ) {
-			$this->_attribute_values[ $name ] = $this->crypt( $value );
-			return $this;
-		}
-		return parent::set( $name, $value );
-	}
+	const CRYPT_SEED = 'dacz:;,aafapojn';
 
 
 	/*************************************************************************
@@ -50,30 +38,15 @@ class User_Model extends Model {
 		}
 	}
 
-	function checkpass( $userpwd, $pass ) {
-		if ( $userpwd === $this->crypt( $pass ) ) {
+	function check_password( $userpwd, $pass ) {
+		if ( $userpwd === $this->encrypt_password( $pass ) ) {
 			return true;
 		} else {
 			throw new Exception( 'Bad password' );
 		}
 	}
 
-	function register( ) {
-		$login = $_POST['login'];
-		$pwd = $_POST['password'];
-		$name = $_POST['name'];
-		$lastname = $_POST['lastname'];
-		$sql = 'INSERT INTO ' . $this->database_table_name( ) . ' SET login=:login, password=:pwd, name=:name, lastname=:lastname;';
-		$request = new Database_Request( $sql );
-		$data = $request->execute( array( ':login' => $login, ':pwd' => $this->crypt( $pwd ), ':name' => $name, ':lastname' => $lastname ) );
-		if ( ! empty( $data ) ) {
-			$this->init_by_data( $data );
-		} else {
-			throw new Exception( 'Registration failed' );
-		}
-	}
-
-	function crypt( $pwd ) {
+	function encrypt_password( $pwd ) {
 		return sha1( self::CRYPT_SEED . $pwd );
 	}
 }
