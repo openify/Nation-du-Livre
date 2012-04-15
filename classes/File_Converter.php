@@ -46,32 +46,24 @@ class File_Converter {
 	protected function convertDoc($source, $destination ) {
 		$ext = pathinfo($destination, PATHINFO_EXTENSION);
 
-		if($ext == 'html'){
-			$this->execute($source, $destination);
+		if ( $ext == 'html' ) {
+			$this->execute( $source, $destination );
 		}
-		elseif ($ext == 'pdf'){
-			$this->execute($source, $destination);
+		elseif ( $ext == 'pdf' ) {
+			$this->execute( $source, $destination );
 		}
 		else{
-			throw new Exception('Unknown format '.$ext);
+			throw new Exception( 'Unknown format ' . $ext );
 		}
 	}
 
 	protected function execute($source, $destination){
-		$ext = pathinfo($destination, PATHINFO_EXTENSION);
-		$dirname = pathinfo($destination, PATHINFO_DIRNAME);
-		echo $dirname;
-		//$dirFrom = getcwd();
-		//chdir($this->dir);
-		mkdir($dirname);
+		$ext     = pathinfo( $destination, PATHINFO_EXTENSION );
+		$dirname = pathinfo( $destination, PATHINFO_DIRNAME );
+		if ( ! is_dir( $dirname ) ) {
+			mkdir( $dirname );
+		}
 		$cmd = self::CONVERTER." --to=$ext --to-name=$destination $source";
-		//echo $cmd;
-		$result = shell_exec($cmd);
-
-		//echo "<pre>$result</pre>";
-		//chdir($dirFrom);
-
-		return $result;
-
+		return shell_exec($cmd);
 	}
 }
