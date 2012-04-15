@@ -12,13 +12,15 @@ class User_Controller {
 			$user->init_by_login( $_POST['login'] );
 			$user->checkpass( $user->password, $_POST['password'] );
 		} else {
-			echo '<h1>Login page</h1>';
-			echo '<form method="post" action="">';
-			echo '<div><label for="login">Login:</label><input type="text" id="login" name="login" /></div>';
-			echo '<div><label for="password">Password:</label><input type="password" id="password" name="password" /></div>';
-			echo '<input type="submit" value="Submit" />';
-			echo '</form>';
+			$title = 'Login page';
+			$content = '<form method="post" action="">' .
+					   '<div><label for="login">Login:</label><input type="text" id="login" name="login" /></div>' .
+					   '<div><label for="password">Password:</label><input type="password" id="password" name="password" /></div>' .
+					   '<input type="submit" value="Submit" />' .
+					   '</form>';
 		}
+		$view = new Default_View( );
+		return $view->render( $title, $content );
 	}
 
 	public function register( ) {
@@ -27,13 +29,17 @@ class User_Controller {
 			$user->register( );
 			echo 'Register validation';
 		} else {
-			echo '<h1>Register page</h1>';
-			echo '<form method="post" action="">';
-			echo '<div><label for="login">Login:</label><input type="text" id="login" name="login" /></div>';
-			echo '<div><label for="password">Password:</label><input type="password" id="password" name="password" /></div>';
-			echo '<input type="submit" value="Submit" />';
-			echo '</form>';
+			$title = 'Register page';
+			$content = '<form method="post" action="">' .
+					   '<div><label for="login">Login:</label><input type="text" id="login" name="login" /></div>' .
+					   '<div><label for="password">Password:</label><input type="password" id="password" name="password" /></div>' .
+					   '<div><label for="name">Name:</label><input type="text" id="name" name="name" /></div>' .
+					   '<div><label for="lastname">Last Name:</label><input type="text" id="lastname" name="lastname" /></div>' .
+					   '<input type="submit" value="Submit" />' .
+					   '</form>';
 		}
+		$view = new Default_View( );
+		return $view->render( $title, $content );
 	}
 
 	public function edit( ) {
