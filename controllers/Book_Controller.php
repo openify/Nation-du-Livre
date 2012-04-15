@@ -1,6 +1,6 @@
 <?php
 
-class Book_Controller {
+class Book_Controller extends Controller {
 
 
 	/*************************************************************************
@@ -16,7 +16,8 @@ class Book_Controller {
 	 CONSTRUCTOR
 	 *************************************************************************/
 	public function __construct( ) {
-		$this->rootDir = getcwd();
+		parent::__construct( );
+		$this->rootDir = getcwd( );
 	}
 
 
@@ -24,32 +25,37 @@ class Book_Controller {
 	 ACTION METHODS
 	 *************************************************************************/
 	public function read( $id ) {
-		$view = new Default_View( );
-		return $view->render( '', $this->get_html_contents( $id ) );
+		$var = array( );		
+		$var[ 'title' ]    = '';
+		$var[ 'content' ]  =  $this->get_html_contents( $id );
+		return $this->render( View::LAYOUT_TEMPLATE, $var ); 
 	}
 
 	public function prepublication( ) {
-		if ( $_POST ) {
+		$var = array( );
+
+		// Validation
+		if ( isset( $_POST[ 'title' ] ) ) {
 			$book = new Book_Model();
 			$book->set('title', $_POST['title']);
 			$book->set('summary', $_POST['summary']);
 			$book->set('table_of_contents', $_POST['table_of_contents']);
-			
-			if ($book->save()){
-				$title = 'Merci, votre demande va être traitée dans les plus brefs délais';
-				$content = '';
+			if ( $book->save( ) ){
+				$var[ 'title' ] = 'Merci, votre demande va être traitée dans les plus brefs délais';
+				$var[ 'content' ] = '';
 			}
+
+		// Formulaire
 		} else {
-			$title = 'Prepublication';
-			$content = '<form method="post" action="">' .
+			$var[ 'title' ] = 'Prepublication';
+			$var[ 'content' ] = '<form method="post" action="">' .
 					   '<div><label for="title">Titre:</label><input type="text" id="title" name="title" /></div>' .
 					   '<div><label for="summary">Résumé:</label><input type="text" id="summary" name="summary" /></div>' .
 					   '<div><label for="table_of_contents">Table des matières :</label><input type="text" id="table_of_contents" name="table_of_contents" /></div>' .
 					   '<input type="submit" value="Submit" />' .
 					   '</form>';
-		}
-		$view = new Default_View( );
-		return $view->render( $title, $content );
+		}		
+		return $this->render( View::LAYOUT_TEMPLATE, $var ); 
 	}
 
 	/*************************************************************************

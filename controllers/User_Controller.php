@@ -1,6 +1,6 @@
 <?php
 
-class User_Controller {
+class User_Controller extends Controller {
 
 
 	/*************************************************************************
@@ -49,8 +49,7 @@ class User_Controller {
 		}
 
 		// Render
-		$view = new Default_View( );
-		return $view->render( $title, $content );
+		return $this->render( $title, $content );
 	}
 
 
@@ -58,6 +57,7 @@ class User_Controller {
 	  REGISTER ACTION                   
 	 *************************************************************************/
 	public function register( ) {
+		$var = array( );
 		if ( $_POST ) {
 			$user = new User_Model( );
 			$user->login = $_POST['login'];
@@ -65,11 +65,11 @@ class User_Controller {
 			$user->name = $_POST['name'];
 			$user->lastname = $_POST['lastname'];
 			$user->save( );
-			$title = 'Register validation';
-			$content = '';
+			$var['title'] = 'Register validation';
+			$var['content'] = '';
 		} else {
-			$title = 'Register page';
-			$content = '<form class="form" method="post" action="">' .
+			$var['title'] = 'Register page';
+			$var['content'] = '<form class="form" method="post" action="">' .
 					   '<div><label for="login">Login:</label><input type="text" id="login" name="login" /></div>' .
 					   '<div><label for="password">Password:</label><input type="password" id="password" name="password" /></div>' .
 					   '<div><label for="name">Name:</label><input type="text" id="name" name="name" /></div>' .
@@ -77,8 +77,7 @@ class User_Controller {
 					   '<input type="submit" value="Submit" />' .
 					   '</form>';
 		}
-		$view = new Default_View( );
-		return $view->render( $title, $content );
+		return $this->render( View::LAYOUT_TEMPLATE, $var ); 
 	}
 
 
@@ -86,7 +85,6 @@ class User_Controller {
 	  EDITION ACTION                   
 	 *************************************************************************/
 	public function edit( ) {
-		$view = new Default_View( );
-		return $view->render( 'Editer votre profil', 'lorem ipsum' );
+		return $this->render( 'Editer votre profil', 'lorem ipsum' );
 	}
 }

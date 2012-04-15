@@ -1,13 +1,15 @@
 <?php
 
-class Welcome_Controller {
+class Welcome_Controller extends Controller {
 
 
 	/*************************************************************************
 	  ACTION METHODS                   
 	 *************************************************************************/
 	public function view( ) {
-		$view = new Default_View( );
-		return $view->render( 'Bienvenue', 'The nation to be' ); 
+		$var = array( );		
+		$var[ 'title' ]    = 'Bienvenue';
+		$var[ 'content' ]  =  'The nation to be';
+		return $this->render( View::LAYOUT_TEMPLATE, $var ); 
 	}
 }
