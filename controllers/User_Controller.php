@@ -37,15 +37,7 @@ class User_Controller extends Controller {
 		// Connection Form 
 		if ( ! isset( $_SESSION[ 'user' ] ) ) {
 			$title = 'Login page';
-			$content = '';
-			if ( ! empty( $error ) ) {
-				$content .= '<p class="warning">' . $error . '</p>'; 
-			}
-			$content .= '<form class="form" method="post" action="">' .
-					   '<div><label for="login">Login:</label><input type="text" id="login" name="login" value="' . ( isset( $_POST['login'] ) ? $_POST['login'] : '' ) . '"/></div>' .
-					   '<div><label for="password">Password:</label><input type="password" id="password" name="password" /></div>' .
-					   '<input type="submit" value="Submit" />' .
-					   '</form>';
+			$var['content'] = $this->render( '../views/user_login_form.html' ); 
 		}
 
 		// Render
@@ -69,13 +61,7 @@ class User_Controller extends Controller {
 			$var['content'] = '';
 		} else {
 			$var['title'] = 'Register page';
-			$var['content'] = '<form class="form" method="post" action="">' .
-					   '<div><label for="login">Login:</label><input type="text" id="login" name="login" /></div>' .
-					   '<div><label for="password">Password:</label><input type="password" id="password" name="password" /></div>' .
-					   '<div><label for="name">Name:</label><input type="text" id="name" name="name" /></div>' .
-					   '<div><label for="lastname">Last Name:</label><input type="text" id="lastname" name="lastname" /></div>' .
-					   '<input type="submit" value="Submit" />' .
-					   '</form>';
+			$var['content'] = $this->render( '../views/user_register_form.html' ); 
 		}
 		return $this->render( View::LAYOUT_TEMPLATE, $var ); 
 	}
