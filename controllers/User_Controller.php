@@ -10,7 +10,12 @@ class User_Controller {
 		if ( isset( $_POST['login'] ) ) {
 			$user = new User_Model();
 			$user->init_by_login( $_POST['login'] );
-			$user->checkpass( $user->password, $_POST['password'] );
+			if ( $user->checkpass( $user->password, $_POST['password'] ) ) {
+				$content = 'Logged in.';
+			} else {
+				$content = '';
+			}
+			$title = '';
 		} else {
 			$title = 'Login page';
 			$content = '<form method="post" action="">' .
@@ -27,7 +32,8 @@ class User_Controller {
 		if ( $_POST ) {
 			$user = new User_Model();
 			$user->register( );
-			echo 'Register validation';
+			$title = 'Register validation';
+			$content = '';
 		} else {
 			$title = 'Register page';
 			$content = '<form method="post" action="">' .

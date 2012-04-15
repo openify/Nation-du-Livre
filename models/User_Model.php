@@ -33,7 +33,7 @@ class User_Model extends Model {
 
 	function checkpass( $userpwd, $pass ) {
 		if ( $userpwd === $this->crypt( $pass ) ) {
-			echo 'Logged in.';
+			return true;
 		} else {
 			throw new Exception( 'Bad password' );
 		}
@@ -42,9 +42,11 @@ class User_Model extends Model {
 	function register( ) {
 		$login = $_POST['login'];
 		$pwd = $_POST['password'];
-		$sql = 'INSERT INTO ' . $this->database_table_name( ) . ' SET login=:login, password=:pwd;';
+		$name = $_POST['name'];
+		$lastname = $_POST['lastname'];
+		$sql = 'INSERT INTO ' . $this->database_table_name( ) . ' SET login=:login, password=:pwd, name=:name, lastname=:lastname;';
 		$request = new Database_Request( $sql );
-		$data = $request->execute( array( ':login' => $login, ':pwd' => $this->crypt( $pwd ) ) );
+		$data = $request->execute( array( ':login' => $login, ':pwd' => $this->crypt( $pwd ), ':name' => $name, ':lastname' => $lastname ) );
 		if ( ! empty( $data ) ) {
 			$this->init_by_data( $data );
 		} else {
