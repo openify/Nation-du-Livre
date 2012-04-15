@@ -18,7 +18,7 @@ class User_Controller {
 			$title = '';
 		} else {
 			$title = 'Login page';
-			$content = '<form method="post" action="">' .
+			$content = '<form class="form" method="post" action="">' .
 					   '<div><label for="login">Login:</label><input type="text" id="login" name="login" /></div>' .
 					   '<div><label for="password">Password:</label><input type="password" id="password" name="password" /></div>' .
 					   '<input type="submit" value="Submit" />' .
@@ -36,7 +36,7 @@ class User_Controller {
 			$content = '';
 		} else {
 			$title = 'Register page';
-			$content = '<form method="post" action="">' .
+			$content = '<form class="form" method="post" action="">' .
 					   '<div><label for="login">Login:</label><input type="text" id="login" name="login" /></div>' .
 					   '<div><label for="password">Password:</label><input type="password" id="password" name="password" /></div>' .
 					   '<div><label for="name">Name:</label><input type="text" id="name" name="name" /></div>' .
