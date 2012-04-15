@@ -38,14 +38,11 @@ CREATE TABLE IF NOT EXISTS `books` (
 
 CREATE TABLE IF NOT EXISTS `books_sections` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `login` varchar(255),
-  `password` varchar(255),
-  `name` varchar(255),
-  `lastname` varchar(255),
   `book` int(11) NOT NULL,
   `section` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `book` (`book`,`section`)
+  KEY `book` (`book`),
+  KEY `section` (`section`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
@@ -86,7 +83,10 @@ INSERT INTO `sections` (`id`, `name`, `left`, `right`) VALUES
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
+  `login` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `name` varchar(255),
+  `lastname` varchar(255),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
