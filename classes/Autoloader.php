@@ -33,7 +33,7 @@ class Autoloader {
         private function loader( $class_name ) {
 		if ( String::ends_with( $class_name, 'Controller' ) ) {
 			$file_path = $this->controllers_folder_path;
-		} else if ( String::ends_with( $class_name, 'Model' ) ) {
+		} else if ( String::ends_with( $class_name, 'Model' ) || String::ends_with( $class_name, 'Relation' ) ) {
 			$file_path = $this->models_folder_path;
 		} else if ( String::ends_with( $class_name, 'View' ) ) {
 			$file_path = $this->views_folder_path;
