@@ -24,7 +24,8 @@ body {
 	z-index: 20;
 }
 .user {
-	padding: 20px 0;
+	padding: 10px 0;
+	line-height: 30px;
 	float: right;
 }
 .user a {
