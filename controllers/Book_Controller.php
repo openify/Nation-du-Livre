@@ -40,7 +40,7 @@ class Book_Controller {
 			if ( ! is_file( $destination ) ) {
 				$this->generate( $id, $format );
 				if ( is_readable( $destination ) ) {
-					return $this->read( $id );
+					return $this->get_html_contents( $id );
 				}
 				throw new Exception( 'Destination not generated' );
 			}
@@ -62,11 +62,11 @@ class Book_Controller {
 		if ( ! is_readable( $source ) ) {
 			throw new Exception( 'Source file is not readable' );
 		}
-			
+
         	$converter = new File_Converter( );
         	$converter->setSource( $source );
 		if ( $format == self::PDF_FORMAT ) {
-	        	$converter->convertDoc( $source, $destination );
+	        	$converter->convertDocToPdf( $source, $destination );
 		} else {
         		$converter->convertDocToHtml( $source, $destination );
 		}
