@@ -12,6 +12,7 @@ class Autoloader {
 	public $models_folder_path;
 	public $views_folder_path;
 	public $classes_folder_path;
+	public $root_paths = array( );
 
 
 	/*************************************************************************
@@ -19,11 +20,12 @@ class Autoloader {
 	 *************************************************************************/
         public function __construct( ) {
 		spl_autoload_register( array( $this, 'loader' ) );
-		$root_path = dirname( dirname( __FILE__ ) );
-		$this->controllers_folder_path = $root_path . '/controllers/';
-		$this->models_folder_path = $root_path . '/models/';
-		$this->views_folder_path = $root_path . '/views/';
-		$this->classes_folder_path = $root_path . '/classes/';
+		$this->root_paths[ ] = dirname( dirname( __FILE__ ) ) . '/';
+		$this->root_paths[ ] = '../';
+		$this->controllers_folder_path = 'controllers/';
+		$this->models_folder_path      = 'models/';
+		$this->views_folder_path       = 'views/';
+		$this->classes_folder_path     = 'classes/';
         }
 
 
@@ -31,19 +33,21 @@ class Autoloader {
 	  PRIVATE METHODS                   
 	 *************************************************************************/
         private function loader( $class_name ) {
-		if ( String::ends_with( $class_name, 'Controller' ) ) {
-			$file_path = $this->controllers_folder_path;
-		} else if ( String::ends_with( $class_name, 'Model' ) || String::ends_with( $class_name, 'Relation' ) ) {
-			$file_path = $this->models_folder_path;
-		} else if ( String::ends_with( $class_name, 'View' ) ) {
-			$file_path = $this->views_folder_path;
+		if ( String::ends_with( $class_name, '_Controller' ) ) {
+			$folder_path = $this->controllers_folder_path;
+		} else if ( String::ends_with( $class_name, '_Model' ) || String::ends_with( $class_name, '_Relation' ) ) {
+			$folder_path = $this->models_folder_path;
+		} else if ( String::ends_with( $class_name, '_View' ) ) {
+			$folder_path = $this->views_folder_path;
 		} else {
-			$file_path = $this->classes_folder_path;
+			$folder_path = $this->classes_folder_path;
 		}
-		$file_path .= $class_name . '.php';
-		if ( is_file( $file_path ) ) {
-			require_once( $file_path );
-			return true;
+		foreach ( $this->root_paths as $root_path ) {
+			$file_path = $root_path . $folder_path . $class_name . '.php';
+			if ( is_file( $file_path ) ) {
+				require_once( $file_path );
+				return true;
+			}
 		}
 		throw new Exception( 'Unknown class name "' . $class_name . '"' );
 	}

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once( dirname( dirname( __FILE__ ) ) . '/include.php' );
+require_once( dirname( __FILE__ ) . '/../../include.php' );
 
 Database_Request::$database_driver = 'mysql';
 Database_Request::$database_host = 'localhost';

@@ -22,8 +22,8 @@ class User_Controller extends Controller {
 				$user->init_by_login( $_POST['login'] );
 				try {
 					$user->check_password( $user->password, $_POST['password'] );
-					$title = '';
-					$content = 'Logged in.';
+					$var['title'] = '';
+					$var['content'] = 'Logged in.';
 					$_SESSION[ 'user' ] = $user;
 				} catch( Exception $e ) {
 					// TODO: Compter le nombre d'erreur de login
@@ -36,12 +36,12 @@ class User_Controller extends Controller {
 		
 		// Connection Form 
 		if ( ! isset( $_SESSION[ 'user' ] ) ) {
-			$title = 'Login page';
+			$var['title'] = 'Login page';
 			$var['content'] = $this->render( '../views/user_login_form.html' ); 
 		}
 
 		// Render
-		return $this->render( $title, $content );
+		return $this->render( View::LAYOUT_TEMPLATE, $var );
 	}
 
 

@@ -1,6 +1,8 @@
 <?php
 if ( ! empty( $error ) ) {
+?>
 	<p class="warning"><?= $error ?></p>; 
+<?php
 }
 ?>
 <form class="form" method="post" action="">
@@ -12,5 +14,5 @@ if ( ! empty( $error ) ) {
 		<label for="password">Password:</label>
 		<input type="password" id="password" name="password" />
 	</div>
-	<input type="	" name="some_name" value="" id="" type="submit" value="Submit" />
+	<input type="submit" value="Submit" />
 </form>
