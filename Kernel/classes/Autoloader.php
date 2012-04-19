@@ -1,5 +1,7 @@
 <?php
 
+namespace Kernel;
+
 require_once( dirname( __FILE__ ) . '/String.php' );
 
 class Autoloader {
@@ -32,7 +34,8 @@ class Autoloader {
 	/*************************************************************************
 	  PRIVATE METHODS                   
 	 *************************************************************************/
-        private function loader( $class_name ) {
+        private function loader( $absolute_class_name ) {
+		$class_name = String::substr_after_last( $absolute_class_name, '\\' );
 		if ( String::ends_with( $class_name, '_Controller' ) ) {
 			$folder_path = $this->controllers_folder_path;
 		} else if ( String::ends_with( $class_name, '_Model' ) || String::ends_with( $class_name, '_Relation' ) ) {
@@ -49,6 +52,6 @@ class Autoloader {
 				return true;
 			}
 		}
-		throw new Exception( 'Unknown class name "' . $class_name . '"' );
+		throw new \Exception( 'Unknown class name "' . $absolute_class_name . '"' );
 	}
 }

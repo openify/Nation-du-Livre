@@ -1,6 +1,6 @@
 <?php
 
-class Welcome_Controller extends Controller {
+class Welcome_Controller extends \Kernel\Controller {
 
 
 	/*************************************************************************
@@ -10,6 +10,6 @@ class Welcome_Controller extends Controller {
 		$var = array( );		
 		$var[ 'title' ]    = 'Bienvenue';
 		$var[ 'content' ]  =  'The nation to be';
-		return $this->render( View::LAYOUT_TEMPLATE, $var ); 
+		return $this->render( \Kernel\View::LAYOUT_TEMPLATE, $var ); 
 	}
 }

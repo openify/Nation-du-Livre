@@ -1,6 +1,6 @@
 <?php
 
-class User_Controller extends Controller {
+class User_Controller extends \Kernel\Controller {
 
 
 	/*************************************************************************
@@ -41,7 +41,7 @@ class User_Controller extends Controller {
 		}
 
 		// Render
-		return $this->render( View::LAYOUT_TEMPLATE, $var );
+		return $this->render( \Kernel\View::LAYOUT_TEMPLATE, $var );
 	}
 
 
@@ -63,7 +63,7 @@ class User_Controller extends Controller {
 			$var['title'] = 'Register page';
 			$var['content'] = $this->render( '../views/user_register_form.html' ); 
 		}
-		return $this->render( View::LAYOUT_TEMPLATE, $var ); 
+		return $this->render( \Kernel\View::LAYOUT_TEMPLATE, $var ); 
 	}
 
 

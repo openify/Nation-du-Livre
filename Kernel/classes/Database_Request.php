@@ -1,5 +1,7 @@
 <?php
 
+namespace Kernel;
+
 class Database_Request {
 
 
@@ -62,7 +64,7 @@ class Database_Request {
 				String::i_starts_with($this->request, "DESCRIBE") || 
 				String::i_starts_with($this->request, "EXPLAIN ")
 			) {
-				$result = $statement->fetchAll( PDO::FETCH_ASSOC );
+				$result = $statement->fetchAll( \PDO::FETCH_ASSOC );
 			} else if ( String::i_starts_with( $this->request, "INSERT" ) ) {
 				$id = $this->PDObject->lastInsertId( );
 				if ( $id == '0' ) {
@@ -91,20 +93,20 @@ class Database_Request {
 	  PRIVATE METHODS                   
 	 *************************************************************************/
 	private function connect( ) {
-		$this->PDObject = new PDO(
+		$this->PDObject = new \PDO(
 			self::$database_driver . ':host=' . self::$database_host . ';dbname=' . self::$database_name,
 			self::$database_user,
 			self::$database_password,
-			array( PDO::ATTR_PERSISTENT => true )
+			array( \PDO::ATTR_PERSISTENT => true )
 		);
-		$this->PDObject->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+		$this->PDObject->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION );
 	}
 	private function disconnect( ) {
 		$this->PDObject = null;
 	}
 }
 
-class Database_Exception extends Exception {
+class Database_Exception extends \Exception {
 }
 
 

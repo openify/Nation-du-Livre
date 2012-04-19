@@ -1,6 +1,8 @@
 <?php
 
-class Relation implements ArrayAccess  {
+namespace Kernel;
+
+class Relation implements \ArrayAccess  {
 
 
 	/*************************************************************************
@@ -60,10 +62,24 @@ class Relation implements ArrayAccess  {
 		}
 	}
 	public function init_by_id( $id ) {
-		$sql = 'SELECT * FROM ' . $this->database_table_name( ) . ' WHERE ' . $this->id_field . '=:id;';
+		return $this->init_by_fields( array( $this->id() => $id ) );
+	}
+	public function init_by_fields( $fields ) {
+		$where = array( );
+		$paramenters = array( );
+		foreach ( $fields as $fields_name => $field_value ) {
+			$where[ ] = $fields_name . '=:' . $fields_name;
+			$paramenters[ ':' . $fields_name ] = $field_value;
+		}
+		$sql = 'SELECT * FROM ' . $this->database_table_name( ) . ' WHERE ' . implode ( ' AND ', $where ) . ';';
 		$request = new Database_Request( $sql );
-		$data = $request->execute_one( array( ':id' => $id ) );
-		$this->init_by_data( $data );
+		$data = $request->execute_one( $paramenters );
+		if ( ! empty( $data ) ) {
+			$this->init_by_data( $data );
+			return TRUE;
+		} else {
+			return FALSE;
+		}
 	}
 	public function get_list_by_data( $datas ) {
 		$class = get_class( $this );

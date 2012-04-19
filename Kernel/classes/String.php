@@ -1,5 +1,7 @@
 <?php
 
+namespace Kernel;
+
 abstract class String {
 
 
@@ -30,9 +32,21 @@ abstract class String {
 		}
 		return $hay;
 	}
+	static function substr_before_last( $hay, $needle ) {
+		if ( String::contains( $hay, $needle ) ) {
+			return substr( $hay, 0, strrpos( $hay, $needle ) );
+		}
+		return $hay;
+	}
 	static function substr_after( $hay, $needle ) {
 		if ( String::contains( $hay, $needle ) ) {
 			return substr( $hay, strpos( $hay, $needle ) + 1 );
+		}
+		return $hay;
+	}
+	static function substr_after_last( $hay, $needle ) {
+		if ( String::contains( $hay, $needle ) ) {
+			return substr( $hay, strrpos( $hay, $needle ) + 1 );
 		}
 		return $hay;
 	}

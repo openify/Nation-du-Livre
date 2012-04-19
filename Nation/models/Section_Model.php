@@ -1,6 +1,6 @@
 <?php
 
-class Section_Model extends Model {
+class Section_Model extends \Kernel\Model {
 
 
 	/*************************************************************************

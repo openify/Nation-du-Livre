@@ -3,13 +3,13 @@ session_start();
 
 require_once( dirname( __FILE__ ) . '/../../include.php' );
 
-Database_Request::$database_driver = 'mysql';
-Database_Request::$database_host = 'localhost';
-Database_Request::$database_name = 'nation';
-Database_Request::$database_user = 'root';
-Database_Request::$database_password = 'password';
+\Kernel\Database_Request::$database_driver = 'mysql';
+\Kernel\Database_Request::$database_host = 'localhost';
+\Kernel\Database_Request::$database_name = 'nation';
+\Kernel\Database_Request::$database_user = 'root';
+\Kernel\Database_Request::$database_password = 'password';
 
-$router = new Router( );
+$router = new \Kernel\Router( );
 try {
 	$router->auto_route( );
 } catch( Exception $e ) {

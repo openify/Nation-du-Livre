@@ -1,6 +1,6 @@
 <?php
 
-class Book_Controller extends Controller {
+class Book_Controller extends \Kernel\Controller {
 
 
 	/*************************************************************************
@@ -28,7 +28,7 @@ class Book_Controller extends Controller {
 		$var = array( );		
 		$var[ 'title' ]    = '';
 		$var[ 'content' ]  =  $this->get_html_contents( $id );
-		return $this->render( View::LAYOUT_TEMPLATE, $var ); 
+		return $this->render( \Kernel\View::LAYOUT_TEMPLATE, $var ); 
 	}
 
 	public function prepublication( ) {
@@ -50,7 +50,7 @@ class Book_Controller extends Controller {
 			$var[ 'title' ] = 'Prepublication';
 			$var[ 'content' ] = $this->render( '../views/book_prepublication_form.html' ); 
 		}		
-		return $this->render( View::LAYOUT_TEMPLATE, $var ); 
+		return $this->render( \Kernel\View::LAYOUT_TEMPLATE, $var ); 
 	}
 
 	/*************************************************************************

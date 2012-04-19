@@ -1,6 +1,6 @@
 <?php
 
-class User_Model extends Model {
+class User_Model extends \Kernel\Model {
 
 
 	/*************************************************************************
@@ -28,12 +28,7 @@ class User_Model extends Model {
 	  INITIALIZATION          
 	 *************************************************************************/
 	function init_by_login( $login ) {
-		$sql = 'SELECT * FROM ' . $this->database_table_name( ) . ' WHERE login=:login;';
-		$request = new Database_Request( $sql );
-		$data = $request->execute_one( array( ':login' => $login ) );
-		if ( ! empty( $data ) ) {
-			$this->init_by_data( $data );
-		} else {
+		if ( ! $this->init_by_fields( array( 'login' => $login ) ) ) {
 			throw new Exception( 'No login found' );
 		}
 	}

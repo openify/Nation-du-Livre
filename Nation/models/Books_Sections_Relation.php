@@ -1,6 +1,6 @@
 <?php
 
-class Books_Sections_Relation extends Relation {
+class Books_Sections_Relation extends \Kernel\Relation {
 
 
 	/*************************************************************************

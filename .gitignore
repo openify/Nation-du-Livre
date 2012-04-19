@@ -1,6 +1,5 @@
-ignore temporary files,
-caches/*
-public/.AbiSuite/*
+caches/
+Nation/public/.AbiSuite/
 *~
 
 .buildpath

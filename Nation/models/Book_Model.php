@@ -1,6 +1,6 @@
 <?php
 
-class Book_Model extends Model {
+class Book_Model extends \Kernel\Model {
 
 
 	/*************************************************************************
