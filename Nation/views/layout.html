@@ -10,8 +10,21 @@
 	<div class="container">
 		<div class="header">
 			<div class="user">
-				<a href="/user/login">Se connecter</a><br>
-				<a href="/user/register">S'inscrire</a>
+				<?php 
+				if ( isset( $_SESSION[ 'user' ] ) ) {
+					$user = new User_Model( );
+					$user->init_by_id( $_SESSION[ 'user' ] );
+				?>
+					Bonjour <a href="/user/edit"><?= $user->name ?></a><br>
+					<a href="/user/logout">Se déconnecter</a>
+				<?php
+				} else {
+				?>	
+					<a href="/user/login">Se connecter</a><br>
+					<a href="/user/register">S'inscrire</a>
+				<?php
+				}
+				?>
 			</div>
 			<h1 class="logo">Nation du livre</h1>
 		</div>

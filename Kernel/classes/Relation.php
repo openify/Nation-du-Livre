@@ -62,7 +62,7 @@ class Relation implements \ArrayAccess  {
 		}
 	}
 	public function init_by_id( $id ) {
-		return $this->init_by_fields( array( $this->id() => $id ) );
+		return $this->init_by_fields( array( $this->id_field => $id ) );
 	}
 	public function init_by_fields( $fields ) {
 		$where = array( );

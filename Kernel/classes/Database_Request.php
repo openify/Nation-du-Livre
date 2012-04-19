@@ -93,10 +93,11 @@ class Database_Request {
 	  PRIVATE METHODS                   
 	 *************************************************************************/
 	private function connect( ) {
+		$project = new Project( );
 		$this->PDObject = new \PDO(
-			self::$database_driver . ':host=' . self::$database_host . ';dbname=' . self::$database_name,
-			self::$database_user,
-			self::$database_password,
+			$project->get( 'Database', 'Driver' ) . ':host=' . $project->get( 'Database', 'Host' ) . ';dbname=' . $project->get( 'Database', 'Name' ),
+			$project->get( 'Database', 'User' ),
+			$project->get( 'Database', 'Password' ),
 			array( \PDO::ATTR_PERSISTENT => true )
 		);
 		$this->PDObject->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION );
