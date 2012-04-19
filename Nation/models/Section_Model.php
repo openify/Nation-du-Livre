@@ -1,5 +1,7 @@
 <?php
 
+namespace Nation;
+
 class Section_Model extends \Kernel\Model {
 
 

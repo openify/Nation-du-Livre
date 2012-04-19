@@ -2,7 +2,8 @@
 
 require_once( dirname( __FILE__) . '/Kernel/classes/Autoloader.php' );
 
-new \Kernel\Autoloader();
+$autoloader = new \Kernel\Autoloader();
+$autoloader->init( );
 
 $project = new \Kernel\Project( );
 $project->init( );

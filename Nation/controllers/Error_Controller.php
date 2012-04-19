@@ -1,5 +1,7 @@
 <?php
 
+namespace Nation;
+
 class Error_Controller extends \Kernel\Controller {
 
 

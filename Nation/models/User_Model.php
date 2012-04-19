@@ -1,5 +1,7 @@
 <?php
 
+namespace Nation;
+
 class User_Model extends \Kernel\Model {
 
 
@@ -29,7 +31,7 @@ class User_Model extends \Kernel\Model {
 	 *************************************************************************/
 	function init_by_login( $login ) {
 		if ( ! $this->init_by_fields( array( 'login' => $login ) ) ) {
-			throw new Exception( 'No login found' );
+			throw new \Exception( 'No login found' );
 		}
 	}
 
@@ -37,7 +39,7 @@ class User_Model extends \Kernel\Model {
 		if ( $userpwd === $this->encrypt_password( $pass ) ) {
 			return true;
 		} else {
-			throw new Exception( 'Bad password' );
+			throw new \Exception( 'Bad password' );
 		}
 	}
 

@@ -1,5 +1,7 @@
 <?php
 
+namespace Nation;
+
 class Welcome_Controller extends \Kernel\Controller {
 
 

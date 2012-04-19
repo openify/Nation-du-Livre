@@ -1,5 +1,7 @@
 <?php
 
+namespace Nation;
+
 class Book_Model extends \Kernel\Model {
 
 
@@ -17,9 +19,6 @@ class Book_Model extends \Kernel\Model {
 		$this->id_field = 'id';
 		$this->database_table_name = 'books';
 	}
-
-
-
 
 }
 

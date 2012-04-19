@@ -1,5 +1,7 @@
 <?php
 
+namespace Nation;
+
 class Book_Controller extends \Kernel\Controller {
 
 
@@ -66,16 +68,16 @@ class Book_Controller extends \Kernel\Controller {
 				if ( is_readable( $destination ) ) {
 					return $this->get_html_contents( $id );
 				}
-				throw new Exception( 'Destination not generated' );
+				throw new \Exception( 'Destination not generated' );
 			}
-			throw new Exception( 'Destination file is not readable' );
+			throw new \Exception( 'Destination file is not readable' );
 		}
 
 		$contents = file_get_contents( $destination );
 		$matches = array( );
 		preg_match( '/<body>(.*)<\/body>/s', $contents, $matches );
 		if ( count( $matches ) < 2 ) {
-			throw new Exception( 'Invalid HTML Export' );
+			throw new \Exception( 'Invalid HTML Export' );
 		}
 		return $matches[ 1 ];
 	}
@@ -84,7 +86,7 @@ class Book_Controller extends \Kernel\Controller {
 		$source       = $this->get_source_path( $id );
 
 		if ( ! is_readable( $source ) ) {
-			throw new Exception( 'Source file is not readable' );
+			throw new \Exception( 'Source file is not readable' );
 		}
 
 		$converter = new File_Converter( );

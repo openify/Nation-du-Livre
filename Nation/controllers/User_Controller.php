@@ -1,5 +1,7 @@
 <?php
 
+namespace Nation;
+
 class User_Controller extends \Kernel\Controller {
 
 
@@ -29,7 +31,7 @@ class User_Controller extends \Kernel\Controller {
 					// TODO: Compter le nombre d'erreur de login
 					$var[ 'error' ] = 'Mot de passe incorrect';
 				}
-			} catch( Exception $e ) {
+			} catch( \Exception $e ) {
 				$var[ 'error' ] = 'Login inconnu';
 			}
 		}
