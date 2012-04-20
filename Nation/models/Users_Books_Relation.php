@@ -2,7 +2,7 @@
 
 namespace Nation;
 
-class Users_Books_Relation extends \Kernel\Relation {
+class Users_Books_Relation extends \Relation {
 
 
 	/*************************************************************************

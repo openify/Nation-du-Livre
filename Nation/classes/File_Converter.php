@@ -55,7 +55,7 @@ class File_Converter {
 			$this->execute( $source, $destination );
 		}
 		else{
-			throw new Exception( 'Unknown format ' . $ext );
+			throw new \Exception( 'Unknown format ' . $ext );
 		}
 	}
 

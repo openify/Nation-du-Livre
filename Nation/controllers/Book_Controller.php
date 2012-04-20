@@ -2,7 +2,7 @@
 
 namespace Nation;
 
-class Book_Controller extends \Kernel\Controller {
+class Book_Controller extends \Controller {
 
 
 	/*************************************************************************
@@ -30,7 +30,7 @@ class Book_Controller extends \Kernel\Controller {
 		$var = array( );		
 		$var[ 'title' ]    = '';
 		$var[ 'content' ]  =  $this->get_html_contents( $id );
-		return $this->render( \Kernel\View::LAYOUT_TEMPLATE, $var ); 
+		return $this->render( \View::LAYOUT_TEMPLATE, $var ); 
 	}
 
 	public function prepublication( ) {
@@ -38,7 +38,7 @@ class Book_Controller extends \Kernel\Controller {
 
 		// Validation
 		if ( isset( $_POST[ 'title' ] ) ) {
-			$book = new Book_Model();
+			$book = new \Book_Model();
 			$book->set('title', $_POST['title']);
 			$book->set('summary', $_POST['summary']);
 			$book->set('table_of_contents', $_POST['table_of_contents']);
@@ -52,7 +52,7 @@ class Book_Controller extends \Kernel\Controller {
 			$var[ 'title' ] = 'Prepublication';
 			$var[ 'content' ] = $this->render( 'book_prepublication_form.html' ); 
 		}		
-		return $this->render( \Kernel\View::LAYOUT_TEMPLATE, $var ); 
+		return $this->render( \View::LAYOUT_TEMPLATE, $var ); 
 	}
 
 	/*************************************************************************

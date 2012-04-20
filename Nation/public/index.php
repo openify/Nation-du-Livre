@@ -1,4 +1,5 @@
 <?php
 session_start();
 
-require_once( dirname( __FILE__ ) . '/../../include.php' );
+$project_name = basename( dirname( dirname( __FILE__ ) ) );
+require_once( dirname( __FILE__ ) . '/../../Kernel/include.php' );
