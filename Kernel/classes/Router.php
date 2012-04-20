@@ -62,7 +62,7 @@ class Router {
 			$controller_name = $url_parts[ 0 ];
 		}
 		try {		
-			$controller_name = $autoloader->find( ucfirst( $controller_name ) . '_Controller' );
+			$controller_name = ucfirst( $controller_name ) . '_Controller';
 			$this->controller = new $controller_name( );
 		} catch ( Exception $e ) {
 			throw new Exception( 'Unknown controller "' . $controller_name . '"' );
