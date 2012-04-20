@@ -1,6 +1,6 @@
 <?php
 
-namespace Nation;
+namespace Provi;
 
 class User_Controller extends \Kernel\Controller {
 
@@ -39,7 +39,7 @@ class User_Controller extends \Kernel\Controller {
 		// Connection Form 
 		if ( ! isset( $_SESSION[ 'user' ] ) ) {
 			$var['title'] = 'Login page';
-			$var['content'] = $this->render( '../views/user_login_form.html', $var ); 
+			$var['content'] = $this->render( 'user_login_form.html', $var ); 
 		}
 
 		// Render
@@ -73,7 +73,7 @@ class User_Controller extends \Kernel\Controller {
 			$var['content'] = '';
 		} else {
 			$var['title'] = 'Register page';
-			$var['content'] = $this->render( '../views/user_register_form.html' ); 
+			$var['content'] = $this->render( 'user_register_form.html' ); 
 		}
 		return $this->render( \Kernel\View::LAYOUT_TEMPLATE, $var ); 
 	}

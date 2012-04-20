@@ -1,5 +1,7 @@
 <?php
 
+namespace Nation;
+
 class File_Converter {
 
 

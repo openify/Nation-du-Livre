@@ -50,7 +50,7 @@ class Book_Controller extends \Kernel\Controller {
 		// Formulaire
 		} else {
 			$var[ 'title' ] = 'Prepublication';
-			$var[ 'content' ] = $this->render( '../views/book_prepublication_form.html' ); 
+			$var[ 'content' ] = $this->render( 'book_prepublication_form.html' ); 
 		}		
 		return $this->render( \Kernel\View::LAYOUT_TEMPLATE, $var ); 
 	}
