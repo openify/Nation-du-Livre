@@ -1,7 +1,7 @@
 Nation du Livre
 ====================
 
-Dépendance
+Dépendances
 ---------------
 Nation du livre utilise :
 * [KernelPHP](https://github.com/openify/Kernel)
