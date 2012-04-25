@@ -28,7 +28,6 @@ class Book extends \Controller {
 	 *************************************************************************/
 	public function read( $id ) {
 		$var = array( );		
-		$var[ 'title' ]    = '';
 		$var[ 'content' ]  =  $this->get_html_contents( $id );
 		return $this->render( \View::LAYOUT_TEMPLATE, $var ); 
 	}
@@ -44,7 +43,6 @@ class Book extends \Controller {
 			$book->set('table_of_contents', $_POST['table_of_contents']);
 			if ( $book->save( ) ){
 				$var[ 'title' ] = 'Merci, votre demande va être traitée dans les plus brefs délais';
-				$var[ 'content' ] = '';
 			}
 
 		// Formulaire

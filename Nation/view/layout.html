@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset='utf-8'>
-	<title><?= $var['title'] ?> - Nation du Livre</title>
+	<title><?= isset( $var['title'] ) ? $var['title'] . ' - ' : '' ?>Nation du Livre</title>
 	<link rel="stylesheet" type="text/css" href="/normalize.css" />
 	<link rel="stylesheet" type="text/css" href="/nation-du-livre.css" />
 </head>
@@ -34,8 +34,8 @@
 			<a href="#">Pourquoi publier ?</a> 
 		</div>
 		<div class="main">
-			<h2><?= $var['title'] ?></h2>			
-			<?= $var['content'] ?>
+			<h2><?= isset( $var['title'] ) ? $var['title'] : '' ?></h2>			
+			<?= isset( $var['content'] ) ? $var['content'] : '' ?>
 		</div>
 		<div class="footer">
 			&copy; Copywrite 2012
