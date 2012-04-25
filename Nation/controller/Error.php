@@ -1,8 +1,8 @@
 <?php
 
-namespace Nation;
+namespace Nation\Controller;
 
-class Error_Controller extends \Controller {
+class Error extends \Controller {
 
 
 	/*************************************************************************

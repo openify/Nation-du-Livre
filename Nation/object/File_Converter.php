@@ -1,6 +1,6 @@
 <?php
 
-namespace Nation;
+namespace Nation\Object;
 
 class File_Converter {
 
@@ -13,12 +13,6 @@ class File_Converter {
 	const SOURCE_DIR	= '/books';
 	const CACHE_DIR		= '/caches';
 	const CONVERTER		= '/usr/bin/abiword';
-
-	/*************************************************************************
-	 CONSTRUCTOR
-	 *************************************************************************/
-	public function __construct( ) {
-	}
 
 
 	/*************************************************************************

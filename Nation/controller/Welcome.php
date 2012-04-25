@@ -1,8 +1,8 @@
 <?php
 
-namespace Nation;
+namespace Nation\Controller;
 
-class Welcome_Controller extends \Controller {
+class Welcome extends \Controller {
 
 
 	/*************************************************************************

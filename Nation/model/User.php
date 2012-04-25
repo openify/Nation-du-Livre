@@ -1,8 +1,8 @@
 <?php
 
-namespace Nation;
+namespace Nation\Model;
 
-class User_Model extends \Provi\User_Model {
+class User extends \Provi\Model\User {
 
 
 	/*************************************************************************
@@ -10,7 +10,8 @@ class User_Model extends \Provi\User_Model {
 	 *************************************************************************/
 	public function __construct( ) {
 		parent::__construct( );
-		$this->add_attribute_relation( 'books', 'user', 'book', new \Users_Books_Relation( ) );
+		// TODO
+		// $this->add_attribute_relation( 'books', 'user', 'book', new \Users_Books_Relation( ) );
 	}
 }
 

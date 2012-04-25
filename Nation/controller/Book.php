@@ -1,8 +1,8 @@
 <?php
 
-namespace Nation;
+namespace Nation\Controller;
 
-class Book_Controller extends \Controller {
+class Book extends \Controller {
 
 
 	/*************************************************************************
@@ -38,7 +38,7 @@ class Book_Controller extends \Controller {
 
 		// Validation
 		if ( isset( $_POST[ 'title' ] ) ) {
-			$book = new \Book_Model();
+			$book = new \Model\Book();
 			$book->set('title', $_POST['title']);
 			$book->set('summary', $_POST['summary']);
 			$book->set('table_of_contents', $_POST['table_of_contents']);
@@ -98,9 +98,9 @@ class Book_Controller extends \Controller {
 		}
 	}
 	private function get_cache_destination_path( $id, $format ) {
-		return $this->rootDir . '/..' . File_Converter::CACHE_DIR  . '/' . $id . '/' . $id . '.' . $format;
+		return $this->rootDir . '/..' . \File_Converter::CACHE_DIR  . '/' . $id . '/' . $id . '.' . $format;
 	}
 	private function get_source_path( $id ) {
-		return $this->rootDir . '/..' . File_Converter::SOURCE_DIR . '/' . $id . '/' . $id . '.doc';
+		return $this->rootDir . '/..' . \File_Converter::SOURCE_DIR . '/' . $id . '/' . $id . '.doc';
 	}
 }

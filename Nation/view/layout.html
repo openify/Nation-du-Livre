@@ -12,7 +12,7 @@
 			<div class="user">
 				<?php 
 				if ( isset( $_SESSION[ 'user' ] ) ) {
-					$user = new \User_Model( );
+					$user = new \Model\User( );
 					$user->init_by_id( $_SESSION[ 'user' ] );
 				?>
 					Bonjour <a href="/user/edit"><?= $user->name ?></a><br>
