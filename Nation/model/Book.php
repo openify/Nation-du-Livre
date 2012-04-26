@@ -2,14 +2,15 @@
 
 namespace Nation\Model;
 
-class Book extends \Model {
+class Book extends \Defined_Model {
 
 
 	/*************************************************************************
 	  CONSTRUCTOR                   
 	 *************************************************************************/
 	public function __construct( ) {
-		$this->add_attribute_field( 'id' );
+		parent::__construct( );
+	
 		$this->add_attribute_field( 'title', TRUE );
 		$this->add_attribute_field( 'summary' );
 		$this->add_attribute_field( 'table_of_contents' );	
