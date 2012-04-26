@@ -7,6 +7,11 @@ require_once( dirname( __FILE__ ) . '/../../Kernel/include.php' );
 $project->display( );
 
 /*
+$user = new \Model\User( );
+print_r( $user->all( ) );
+*/
+
+/*
 $article = new \Model\Article( );
 if ( $article->init_by_id( '11' ) ) {
 	$article->delete( );

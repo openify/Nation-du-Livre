@@ -27,13 +27,11 @@ class Book extends \Controller {
 	 ACTION METHODS
 	 *************************************************************************/
 	public function read( $id ) {
-		$var = array( );		
-		$var[ 'content' ]  =  $this->get_html_contents( $id );
-		return $this->render( \View::LAYOUT_TEMPLATE, $var ); 
+		$this->view->content  =  $this->get_html_contents( $id );
+		return $this->render( \View::LAYOUT_TEMPLATE ); 
 	}
 
 	public function prepublication( ) {
-		$var = array( );
 
 		// Validation
 		if ( isset( $_POST[ 'title' ] ) ) {
@@ -42,15 +40,15 @@ class Book extends \Controller {
 			$book->set('summary', $_POST['summary']);
 			$book->set('table_of_contents', $_POST['table_of_contents']);
 			if ( $book->save( ) ){
-				$var[ 'title' ] = 'Merci, votre demande va être traitée dans les plus brefs délais';
+				$this->view->title = 'Merci, votre demande va être traitée dans les plus brefs délais';
 			}
 
 		// Formulaire
 		} else {
-			$var[ 'title' ] = 'Prepublication';
-			$var[ 'content' ] = $this->render( 'book_prepublication_form.html' ); 
+			$this->view->title = 'Prepublication';
+			$this->view->content = $this->render( 'book_prepublication_form.html' ); 
 		}		
-		return $this->render( \View::LAYOUT_TEMPLATE, $var ); 
+		return $this->render( \View::LAYOUT_TEMPLATE ); 
 	}
 
 	/*************************************************************************

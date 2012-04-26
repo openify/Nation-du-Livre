@@ -6,12 +6,17 @@ class Welcome extends \Controller {
 
 
 	/*************************************************************************
+	 ATTRIBUTES
+	 *************************************************************************/
+	public $default_action = 'view';
+
+
+	/*************************************************************************
 	  ACTION METHODS                   
 	 *************************************************************************/
 	public function view( ) {
-		$var = array( );		
-		$var[ 'title' ]    = 'Bienvenue';
-		$var[ 'content' ]  =  'The nation to be';
-		return $this->render( \View::LAYOUT_TEMPLATE, $var ); 
+		$this->view->title   = 'Bienvenue';
+		$this->view->content = 'The nation to be';
+		return $this->render( \View::LAYOUT_TEMPLATE ); 
 	}
 }
