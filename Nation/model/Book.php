@@ -2,7 +2,7 @@
 
 namespace Nation\Model;
 
-class Book extends \Defined_Model {
+class Book extends \Model_Defined {
 
 
 	/*************************************************************************
