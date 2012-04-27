@@ -7,6 +7,19 @@ require_once( dirname( __FILE__ ) . '/../../Kernel/include.php' );
 $project->display( );
 
 /*
+$model = new Model\coco( );
+$model->id = 8;
+
+$relation = new \Relation\Coco( );
+$relation->name = 'coco';
+$relation->set_index( '1' );
+$relation->model = $model;
+if ( $relation->init_by_id( 5 ) ) {
+	print_r( $relation );
+}
+*/
+
+/*
 $user = new \Model\User( );
 print_r( $user->all( ) );
 */

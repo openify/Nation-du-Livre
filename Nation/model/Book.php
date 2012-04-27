@@ -11,12 +11,12 @@ class Book extends \Model_Defined {
 	public function __construct( ) {
 		parent::__construct( );
 	
-		$this->add_attribute_field( 'title', TRUE );
-		$this->add_attribute_field( 'summary' );
-		$this->add_attribute_field( 'table_of_contents' );	
+		$this->add_attribute_field( 'title' );
+		$this->add_attribute_field( 'summary', new \Data_type\Text( ) );
+		$this->add_attribute_field( 'table_of_contents', new \Data_type\Text( ) );	
 		
 		// TODO			
-		// $this->add_attribute_relation( 'users', 'book', 'user', new \Users_Books_Relation( ) );
+		$this->add_attribute_field( 'authors', new \Data_type\Relation( new \Relation\Users_Books( \Relation::REVERSED ) ) );
 		// $this->add_attribute_relation( 'sections', 'book', 'section', new \Books_Sections_Relation( ) );
 	}
 
