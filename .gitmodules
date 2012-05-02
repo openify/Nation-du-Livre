@@ -1,0 +1,3 @@
+[submodule "Packadata"]
+	path = Packadata
+	url = git@github.com:Supersoniq/Packadata.git
