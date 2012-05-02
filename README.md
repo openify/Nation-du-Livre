@@ -4,7 +4,7 @@ Nation du Livre
 Dépendances
 ---------------
 Nation du livre utilise :
-* [KernelPHP](https://github.com/openify/Kernel)
+* [Packadata](https://github.com/Supersoniq/Packadata)
 * [Abisource](http://abisource.com/wiki/Install_on_Ubuntu)
 
 
