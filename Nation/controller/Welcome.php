@@ -2,7 +2,7 @@
 
 namespace Nation\Controller;
 
-class Welcome extends \Controller {
+class Welcome extends \Controller_Defined {
 
 
 	/*************************************************************************
