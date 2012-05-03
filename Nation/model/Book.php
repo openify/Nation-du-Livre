@@ -16,7 +16,7 @@ class Book extends \Model_Defined {
 		$this->add_attribute_field( 'table_of_contents', new \Data_type\Text( ) );	
 		
 		// TODO			
-		$this->add_attribute_field( 'authors', new \Data_type\Relation( new \Relation\Users_Books( \Relation::REVERSED ) ) );
+		$this->add_attribute_field( 'authors', new \Relation\Users_Books( \Relation::REVERSED ) );
 		// $this->add_attribute_relation( 'sections', 'book', 'section', new \Books_Sections_Relation( ) );
 	}
 

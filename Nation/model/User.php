@@ -10,7 +10,7 @@ class User extends \Provi\Model\User {
 	 *************************************************************************/
 	public function __construct( ) {
 		parent::__construct( );
-		$this->add_attribute_field( 'books', new \Data_type\Relation( new \Relation\Users_Books( ) ) );
+		$this->add_attribute_field( 'books', new \Relation\Users_Books( ) );
 	}
 }
 
