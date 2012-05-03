@@ -34,7 +34,16 @@
 			<a href="#">Pourquoi publier ?</a> 
 		</div>
 		<div class="main">
-			<h2><?= $this->title ?></h2>			
+			<h2><?= $this->title ?></h2>
+			<?php
+			foreach( \Message::pull(  ) as $message ) {
+			?>
+				<div class="alert alert-<?= $message->level ?>">
+					<?= $message ?>
+				</div>
+			<?php
+			}
+			?>			
 			<?= $this->content ?>
 		</div>
 		<div class="footer">

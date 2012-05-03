@@ -66,9 +66,29 @@ body {
     width: 700px;
 }
 .form div label {
-    float: left;
+	float: left;
 	margin-right: 10px;
-    position: relative;
-    text-align: right;
-    width: 100px;
+	position: relative;
+	text-align: right;
+	width: 100px;
+}
+
+.alert {
+	color: #3a87ad;
+	background: #d9edf7;
+	border: 1px solid; #bce8f1;
+	margin-bottom: 1em;
+	padding: 0.5em;
+}
+
+.alert-success {
+	color: #468847;
+	background-color: #dff0d8;
+	border-color: #d6e9c6;
+}
+
+.alert-error {
+	color: #b94a48;
+	background-color: #f2dede;
+	border-color: #eed3d7;
 }
