@@ -2,7 +2,7 @@
 
 namespace Nation\Controller;
 
-class Book extends \Controller {
+class Book extends \Controller\Model {
 
 
 	/*************************************************************************
