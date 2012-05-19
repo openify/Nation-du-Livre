@@ -2,7 +2,7 @@
 
 namespace Nation\Model;
 
-class Book extends \Model_Defined {
+class Book extends \Model\Defined {
 
 
 	/*************************************************************************
@@ -24,7 +24,7 @@ class Book extends \Model_Defined {
 		$this->add_attribute_field( 'table_of_contents', new \Data_Type\Text( ) );	
 		
 		// TODO			
-		$this->add_attribute_field( 'authors', new \Relation\Users_Books( \Relation::REVERSED ) );
+		$this->add_attribute_field( 'authors', new \Relation\Users_Books( \Relation\__Base::REVERSED ) );
 		// $this->add_attribute_relation( 'sections', 'book', 'section', new \Books_Sections_Relation( ) );
 	}
 
